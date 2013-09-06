@@ -16,14 +16,12 @@
 struct refcnt {
 	void *ptr;
 	int cnt;
-	void (*destructor)(void *ptr, void *data);
-	void *destructor_data;
+	void (*destructor)(void *ptr);
 };
 
-struct refcnt * refcnt_create(void *ptr, void (*destructor)(void *, void *),
-		void *destructor_data);
+struct refcnt * refcnt_create(void *ptr, void (*destructor)(void *));
 
-void refcnt_get(struct refcnt *ref);
+void refcnt_add(struct refcnt *ref);
 void refcnt_del(struct refcnt *ref);
 
 #endif
